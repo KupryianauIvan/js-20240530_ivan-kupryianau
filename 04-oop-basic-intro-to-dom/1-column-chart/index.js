@@ -17,6 +17,13 @@ export default class ColumnChart {
     this.element = this.createElement(this.createTemplate());
   }
 
+  createElement(template) {
+    const element = document.createElement('div');
+    element.innerHTML = template;
+
+    return element.firstElementChild;
+  }
+
   createTemplate() {
     return `
     <div class="${this.createCSSColumnChartClass()}" style="${this.chartHeight}">
@@ -38,6 +45,18 @@ export default class ColumnChart {
     return this.data.length ? `column-chart` : 'column-chart column-chart_loading';
   }
 
+  createTemplateLink() {
+    return this.link ? `<a href="${this.link}" class="column-chart__link">View all</a>` : '';
+  }
+
+  createBodyTemplate() {
+    return this.data.length ? this.getColumnProps().map(({percent, value}) => {
+      return `
+        <div style="--value: ${value}" data-tooltip="${percent}"></div>
+      `;
+    }).join('') : `<img src='./charts-skeleton.svg' alt='charts-skeleton' />`;
+  }
+
   getColumnProps() {
     const maxValue = Math.max(...this.data);
     const scale = 50 / maxValue;
@@ -53,25 +72,6 @@ export default class ColumnChart {
   update(newData) {
     this.data = newData;
     this.element.querySelector('[data-element="body"]').innerHTML = this.createBodyTemplate();
-  }
-
-  createBodyTemplate() {
-    return this.data ? this.getColumnProps().map(({ percent, value }) => {
-      return `
-        <div style="--value: ${value}" data-tooltip="${percent}"></div>
-      `;
-    }).join('') : `<img src='./charts-skeleton.svg' alt='charts-skeleton' />`;
-  }
-
-  createTemplateLink() {
-    return this.link ? `<a href="${this.link}" class="column-chart__link">View all</a>` : '';
-  }
-
-  createElement(template) {
-    const element = document.createElement('div');
-    element.innerHTML = template;
-
-    return element.firstElementChild;
   }
 
   remove() {

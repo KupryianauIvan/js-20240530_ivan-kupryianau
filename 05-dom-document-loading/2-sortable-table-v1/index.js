@@ -41,19 +41,14 @@ export default class SortableTable {
     `;
   }
 
-  createTemplateBodyItem(dataItem) {
-    return `
-        <a href="/products/${dataItem.id}" class="sortable-table__row">
-        ${this.headerConfig.map((item) => {
-    if (item.template) {
-      return item.template(dataItem.images);
-    } else {
+  createTemplateHeader() {
+    return this.headerConfig.map(({id, sortable, title}) => {
       return `
-              <div class="sortable-table__cell">${dataItem[item.id]}</div>
-            `;
-    }
-  }).join("")}
-       </a>`;
+        <div class="sortable-table__cell" data-id=${id} data-sortable=${sortable}>
+            <span>${title}</span>
+        </div>
+      `;
+    }).join("");
   }
 
   createTemplateBody() {
@@ -73,14 +68,19 @@ export default class SortableTable {
     `;
   }
 
-  createTemplateHeader() {
-    return this.headerConfig.map(({id, sortable, title}) => {
-      return `
-        <div class="sortable-table__cell" data-id=${id} data-sortable=${sortable}>
-        <span>${title}</span>
-      </div>
-      `;
-    }).join("");
+  createTemplateBodyItem(dataItem) {
+    return `
+        <a href="/products/${dataItem.id}" class="sortable-table__row">
+        ${this.headerConfig.map((item) => {
+      if (item.template) {
+        return item.template(dataItem.images);
+      } else {
+        return `
+              <div class="sortable-table__cell">${dataItem[item.id]}</div>
+            `;
+      }
+    }).join("")}
+       </a>`;
   }
 
   sort(field = "title", order = "asc") {

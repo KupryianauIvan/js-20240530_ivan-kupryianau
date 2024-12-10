@@ -15,6 +15,10 @@ export default class SortableTable extends SortableTableV1 {
     this.updateArrowPosition();
   }
 
+  createEventListeners() {
+    this.element.addEventListener('pointerdown', this.handleElementClick);
+  }
+
   createArrowElement() {
     const arrowElement = document.createElement("span");
 
@@ -41,11 +45,6 @@ export default class SortableTable extends SortableTableV1 {
     this.updateArrowPosition();
     this.sort(this.sortedId, this.sortedOrder);
   };
-
-
-  createEventListeners() {
-    this.element.addEventListener('pointerdown', this.handleElementClick);
-  }
 
   destroyEventListeners() {
     this.element.removeEventListener('pointerdown', this.handleElementClick);

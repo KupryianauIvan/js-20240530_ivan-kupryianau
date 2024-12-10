@@ -13,6 +13,13 @@ export default class NotificationMessage {
     this.element = this.createElement(this.createTemplate());
   }
 
+  createElement(template) {
+    const element = document.createElement('div');
+    element.innerHTML = template;
+
+    return element.firstElementChild;
+  }
+
   createTemplate() {
     return (`
     <div class="${this.handleTypeCSS()}" style="--value:${this.getSeconds()}">
@@ -26,31 +33,25 @@ export default class NotificationMessage {
   </div>`);
   }
 
-  createElement(template) {
-    const element = document.createElement('div');
-    element.innerHTML = template;
-
-    return element.firstElementChild;
+  handleTypeCSS() {
+    return this.type === 'success' ? 'notification success' : 'notification error';
   }
 
   getSeconds() {
     return `${((this.duration % 60000) / 1000).toFixed(0)}s`;
   }
 
-  handleTypeCSS() {
-    return this.type === 'success' ? 'notification success' : 'notification error';
-  }
-
   show(container = document.body) {
     if (NotificationMessage.currentShownComponentLink) {
       NotificationMessage.currentShownComponentLink.destroy();
     }
+
     NotificationMessage.currentShownComponentLink = this;
 
     container.append(this.element);
     this.timerId = setTimeout(() => {
       this.destroy();
-    }, this.duration);
+    }, +this.duration);
   }
 
   remove() {
