@@ -3,6 +3,14 @@ class Tooltip {
 
   element;
 
+  constructor() {
+    if (Tooltip.instance) {
+      return Tooltip.instance;
+    }
+
+    Tooltip.instance = this;
+  }
+
   onPointerOver = event => {
     const element = event.target.closest('[data-tooltip]');
 
@@ -16,17 +24,20 @@ class Tooltip {
     this.moveTooltip(event);
   };
 
+  moveTooltip(event) {
+    const shift = 10;
+    const left = event.clientX + shift;
+    const top = event.clientY + shift;
+
+    // TODO: Add logic for window borders
+
+    this.element.style.left = `${left}px`;
+    this.element.style.top = `${top}px`;
+  }
+
   onPointerOut = () => {
     this.remove();
   };
-
-  constructor() {
-    if (Tooltip.instance) {
-      return Tooltip.instance;
-    }
-
-    Tooltip.instance = this;
-  }
 
   initialize() {
     this.initEventListeners();
@@ -43,17 +54,6 @@ class Tooltip {
     this.element.innerHTML = html;
 
     document.body.append(this.element);
-  }
-
-  moveTooltip(event) {
-    const shift = 10;
-    const left = event.clientX + shift;
-    const top = event.clientY + shift;
-
-    // TODO: Add logic for window borders
-
-    this.element.style.left = `${left}px`;
-    this.element.style.top = `${top}px`;
   }
 
   remove() {
