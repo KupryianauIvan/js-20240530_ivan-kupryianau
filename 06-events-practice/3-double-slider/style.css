@@ -51,6 +51,18 @@ body {
   cursor: grab;
 }
 
+.range-slider__thumb-left::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}
+
 /* cursor over all slider, so that if the cursor moves out of the thumb, it's still grabbing */
 .range-slider_dragging,
 .range-slider_dragging .range-slider__thumb-right,
@@ -85,6 +97,7 @@ body {
   flex-direction: row;
   align-items: center;
   padding: 0 60px;
+  margin: 0 auto;
 }
 
 .range-slider > span {
