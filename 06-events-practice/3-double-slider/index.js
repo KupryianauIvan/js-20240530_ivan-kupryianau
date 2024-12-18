@@ -132,5 +132,4 @@ export default class DoubleSlider {
       this.element.remove();
     }
   }
-
 }

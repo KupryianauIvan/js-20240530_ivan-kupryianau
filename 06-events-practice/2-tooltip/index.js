@@ -3,6 +3,7 @@ class Tooltip {
 
   element;
 
+<<<<<<< HEAD
   constructor() {
     if (Tooltip.instance) {
       return Tooltip.instance;
@@ -11,6 +12,8 @@ class Tooltip {
     Tooltip.instance = this;
   }
 
+=======
+>>>>>>> 25c2ba31e687f6a6e25ad302a5368ef579a39ae4
   onPointerOver = event => {
     const element = event.target.closest('[data-tooltip]');
 
@@ -24,6 +27,7 @@ class Tooltip {
     this.moveTooltip(event);
   };
 
+<<<<<<< HEAD
   moveTooltip(event) {
     const shift = 10;
     const left = event.clientX + shift;
@@ -35,10 +39,23 @@ class Tooltip {
     this.element.style.top = `${top}px`;
   }
 
+=======
+>>>>>>> 25c2ba31e687f6a6e25ad302a5368ef579a39ae4
   onPointerOut = () => {
     this.remove();
   };
 
+<<<<<<< HEAD
+=======
+  constructor() {
+    if (Tooltip.instance) {
+      return Tooltip.instance;
+    }
+
+    Tooltip.instance = this;
+  }
+
+>>>>>>> 25c2ba31e687f6a6e25ad302a5368ef579a39ae4
   initialize() {
     this.initEventListeners();
   }
@@ -56,6 +73,20 @@ class Tooltip {
     document.body.append(this.element);
   }
 
+<<<<<<< HEAD
+=======
+  moveTooltip(event) {
+    const shift = 10;
+    const left = event.clientX + shift;
+    const top = event.clientY + shift;
+
+    // TODO: Add logic for window borders
+
+    this.element.style.left = `${left}px`;
+    this.element.style.top = `${top}px`;
+  }
+
+>>>>>>> 25c2ba31e687f6a6e25ad302a5368ef579a39ae4
   remove() {
     if (this.element) {
       this.element.remove();
