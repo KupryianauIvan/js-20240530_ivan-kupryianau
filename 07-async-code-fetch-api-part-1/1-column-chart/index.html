@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>ColumnChart</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
+
   </head>
 
   <body>
@@ -20,6 +21,11 @@
 
     <script type="module">
       import ColumnChart from './index.js';
+
+      const ordersElement = document.getElementById('orders');
+      const salesElement = document.getElementById('sales');
+      const customersElement = document.getElementById('customers');
+      const loadOrdersButton = document.getElementById('loadOrders');
 
       const getRange = () => {
         const now = new Date();
@@ -47,7 +53,7 @@
         link: '#'
       });
 
-      loadOrders.addEventListener('click', () => {
+      loadOrdersButton.addEventListener('click', () => {
         ordersChart.update(new Date(start.value), new Date(end.value))
       });
 
@@ -70,9 +76,9 @@
         label: 'customers',
       });
 
-      orders.append(ordersChart.element);
-      sales.append(salesChart.element);
-      customers.append(customersChart.element);
+      ordersElement.append(ordersChart.element);
+      salesElement.append(salesChart.element);
+      customersElement.append(customersChart.element);
     </script>
   </body>
 </html>

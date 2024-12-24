@@ -32,7 +32,7 @@ export default class DoubleSlider {
     }
 
     const rangeSlider = document.querySelector('.range-slider');
-    rangeSlider.style.width = `${this.from + this.to}px`
+    rangeSlider.style.width = `${this.from + this.to}px`;
   }
 
   createElement(template) {
